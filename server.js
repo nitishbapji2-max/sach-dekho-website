@@ -1,6 +1,6 @@
 const express=require('express'),path=require('path'),fs=require('fs'),crypto=require('crypto'),bcrypt=require('bcryptjs'),jwt=require('jsonwebtoken'),multer=require('multer');
 const app=express(),PORT=process.env.PORT||3000,SECRET=process.env.JWT_SECRET||'CHANGE_THIS_SECRET';
-const DATA=path.join(__dirname,'data/users.json'),UPLOAD=path.join(__dirname,'public/uploads');fs.mkdirSync(UPLOAD,{recursive:true});if(!fs.existsSync(DATA))fs.writeFileSync(DATA,'[]');
+const DATA=path.join(__dirname,'users.json'),UPLOAD=path.join(__dirname,'public/uploads');fs.mkdirSync(UPLOAD,{recursive:true});if(!fs.existsSync(DATA))fs.writeFileSync(DATA,'[]');
 app.use(express.json({limit:'2mb'}));app.use(express.static(path.join(__dirname,'public')));
 const upload=multer({dest:UPLOAD,limits:{fileSize:50*1024*1024}});
 const users=()=>JSON.parse(fs.readFileSync(DATA,'utf8'));const save=u=>fs.writeFileSync(DATA,JSON.stringify(u,null,2));
